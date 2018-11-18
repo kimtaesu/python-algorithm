@@ -8,35 +8,34 @@ def swap(x, i, j):
 def mergeSort(list):
     if len(list) > 1:
         mid = len(list) // 2
-        lefthalf = list[:mid]
-        righthalf = list[mid:]
+        left_half = list[mid:]
+        right_half = list[:mid]
 
-        mergeSort(lefthalf)
-        mergeSort(righthalf)
+        mergeSort(left_half)
+        mergeSort(right_half)
 
-        i = 0
-        j = 0
         k = 0
+        left = 0
+        right = 0
 
-        while i < len(lefthalf) and j < len(righthalf):
-            if lefthalf[i] < righthalf[j]:
-                list[k] = lefthalf[i]
-                i += 1
+        while left < len(left_half) and right < len(right_half):
+            if left_half[left] < right_half[right]:
+                list[k] = left_half[left]
+                left += 1
             else:
-                list[k] = righthalf[j]
-                j += 1
-            k = k + 1
-
-        while i < len(lefthalf):
-            list[k] = lefthalf[i]
-            i += 1
+                list[k] = right_half[right]
+                right += 1
             k += 1
 
-        while j < len(righthalf):
-            list[k] = righthalf[j]
-            j += 1
+        while left < len(left_half):
+            list[k] = left_half[left]
+            left += 1
             k += 1
 
+        while right < len(right_half):
+            list[k] = right_half[right]
+            right += 1
+            k += 1
 
 mergeSort(data)
 
