@@ -5,32 +5,33 @@ def swap(x, i, j):
     x[i], x[j] = x[j], x[i]
 
 
-def heap_sort(a):
-    def siftdown(a, i, size):
-        l = 2 * i + 1
-        r = 2 * i + 2
-        largest = i
-        if l <= size - 1 and a[l] > a[i]:
-            largest = l
-        if r <= size - 1 and a[r] > a[largest]:
-            largest = r
-        if largest != i:
-            swap(a, i, largest)
-            siftdown(a, largest, size)
+def heap_sort(input):
+    p = (len(input) // 2) - 1
+    # heapify
+    while p >= 0:
+        siftdown(input, p, len(input) - 1)
+        p -= 1
 
-    def heapify(a, size):
-        p = (size // 2) - 1
-        while p >= 0:
-            siftdown(a, p, size)
-            p -= 1
+    out = len(input) - 1
+    while out > 0:
+        input[0], input[out] = input[out], input[0]
+        out -= 1
+        siftdown(input, 0, out)
 
-    size = len(a)
-    heapify(a, size)
-    end = size - 1
-    while end > 0:
-        swap(a, 0, end)
-        siftdown(a, 0, end)
-        end -= 1
+
+def siftdown(arr, p, last):
+    left = 2 * p + 1
+    right = 2 * p + 2
+    if left > last:
+        return
+    if right > last or arr[left] > arr[right]:
+        max_node = left
+    else:
+        max_node = right
+
+    if arr[max_node] > arr[p]:
+        arr[max_node], arr[p] = arr[p], arr[max_node]
+        siftdown(arr, max_node, last)
 
 
 heap_sort(data)
