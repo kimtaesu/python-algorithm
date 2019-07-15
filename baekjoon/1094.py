@@ -1,22 +1,13 @@
-import unittest
+X = int(input())
 
+bars = [32, 16, 8, 4, 2, 1, 1]
 
-class Backjoon1094(unittest.TestCase):
-    def f1094(self, x):
-        length = 64
-        sum = 0
-        count = 0
+b_sum = []
+for b in bars:
+    if (b <= X) & ((sum(b_sum) + b) <= X):
+        b_sum.append(b)
 
-        while x > 0:
-            if length > x:
-                length /= 2
-            else:
-                count += 1
-                print("length > x {}".format(length))
-                x -= length
-        return count
-
-    def test1094(self):
-        expect = 4
-        actual = self.f1094(23)
-        self.assertEqual(expect, actual)
+if X == 64:
+    print(1)
+else:
+    print(len(b_sum))
