@@ -1,18 +1,22 @@
 from typing import List
 
 
-class Solution():
-    def merge(self, intervals: List[List[int]]) -> List[List[int]]:
-        intervals.sort(key=lambda x: x[0])
+class Solution:
+    def merge(self, intervals):
+        intervals.sort(key=lambda x: x.start)
 
         merged = []
-        for i in intervals:
-            if not merged or merged[-1][1] < i[0]:
-                merged.append(i)
+        for interval in intervals:
+            # if the list of merged intervals is empty or if the current
+            # interval does not overlap with the previous, simply append it.
+            if not merged or merged[-1].end < interval.start:
+                merged.append(interval)
             else:
-                merged[-1][1] = max(merged[-1][1], i[1])
+                # otherwise, there is overlap, so we merge the current and previous
+                # intervals.
+                merged[-1].end = max(merged[-1].end, interval.end)
+
         return merged
 
 
-if __name__ == '__main__':
-    Solution().merge([[1, 3], [2, 6], [8, 10], [15, 18]])
+print(Solution().merge([[1, 3], [2, 6], [8, 10], [15, 18]]))
